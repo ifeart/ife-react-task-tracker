@@ -1,0 +1,56 @@
+{
+    "task": {
+        "title": "Task",
+        "description": "Description",
+        "createdAt": "Created",
+        "updatedAt": "Updated",
+        "dueDate": "Due Date",
+        "category": "Category",
+        "status": "Status",
+        "priority": "Priority"
+    },
+    "status": {
+        "todo": "Pending",
+        "in_progress": "In Progress",
+        "done": "Done"
+    },
+    "category": {
+        "bug": "Bug",
+        "feature": "Feature",
+        "documentation": "Documentation",
+        "refactor": "Refactor",
+        "test": "Test"
+    },
+    "priority": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+    },
+    "ui": {
+        "taskTracker": "Task Tracker",
+        "demoDescription": "By default, test tasks are used for demonstration, which can be deleted and replaced with your own",
+        "unknown": "Unknown",
+        "other": "Other",
+        "editTask": "Edit Task",
+        "cancel": "Cancel",
+        "save": "Save",
+        "toogleTheme": "Toggle Theme",
+        "ru": "Russian",
+        "en": "English",
+        "language": "Language",
+        "refreshTestTasks": "Refresh Test Tasks",
+        "deleteAllTasks": "Delete All Tasks",
+        "searchTasks": "Search task...",
+        "addTask": "Add Task",
+        "taskNotFound": "Task not found :(",
+        "noDescription": "No description",
+        "dueDate": "Deadline",
+        "noDueDate": "No deadline",
+        "deleteTask": "Delete Task",
+        "doneTask": "Done Task"
+    },
+    "TaskDetailPage": {
+        "createdAt": "Created",
+        "updatedAt": "Updated"
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "task": {
+        "title": "Задача",
+        "description": "Описание",
+        "createdAt": "Создано",
+        "updatedAt": "Обновлено",
+        "dueDate": "Срок выполнения",
+        "category": "Категория",
+        "status": "Статус",
+        "priority": "Приоритет"
+    },
+    "status": {
+        "todo": "Ожидает",
+        "in_progress": "В работе",
+        "done": "Выполнено"
+    },
+    "category": {
+        "bug": "Баг",
+        "feature": "Функция",
+        "documentation": "Документация",
+        "refactor": "Рефакторинг",
+        "test": "Тест"
+    },
+    "priority": {
+        "low": "Низкий",
+        "medium": "Средний",
+        "high": "Высокий"
+    },
+    "ui": {
+        "taskTracker": "Трекер задач",
+        "demoDescription": "По умолчанию для демонстрации используются тестовые задачи, которые можно удалить и заменить на свои",
+        "unknown": "Неизвестно",
+        "other": "Прочее",
+        "editTask": "Редактировать задачу",
+        "cancel": "Отмена",
+        "save": "Сохранить",
+        "toogleTheme": "Переключить тему",
+        "ru": "Русский",
+        "en": "Английский",
+        "language": "Язык",
+        "refreshTestTasks": "Восстановить тестовые задачи",
+        "deleteAllTasks": "Удалить все задачи",
+        "searchTasks": "Поиск задачи...",
+        "addTask": "Добавить задачу",
+        "taskNotFound": "Задача не найдена :(",
+        "noDescription": "Нет описания",
+        "dueDate": "Дедлайн",
+        "noDueDate": "Без дедлайна",
+        "deleteTask": "Удалить задачу",
+        "doneTask": "Завершить задачу"
+    },
+    "TaskDetailPage": {
+        "createdAt": "Создано",
+        "updatedAt": "Обновлено"
+    }
+}
