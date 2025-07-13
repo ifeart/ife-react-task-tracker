@@ -215,7 +215,10 @@ export default function TaskList() {
   }, []);
 
   return (
-    <Container maxWidth="xl" sx={{ py: 3 }}>
+    <Container
+      maxWidth="xl"
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <Typography variant="h4" component="h1" gutterBottom>
         ifeTasks - {t("ui.taskTracker")}
       </Typography>
@@ -253,31 +256,33 @@ export default function TaskList() {
         </Button>
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Grid
-          container
-          spacing={3}
-          sx={{
-            maxWidth: 1200,
-            justifyContent: "center",
-          }}
-        >
-          {tasks.map((task) => (
-            <Grid
-              size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-              key={task.id}
+      <Box></Box>
+
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          maxWidth: 1200,
+          width: "100%",
+        }}
+      >
+        {tasks.map((task) => (
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={task.id}>
+            <Box
               sx={{
+                width: "100%",
+                maxWidth: 345,
+                minWidth: { xs: "100%", sm: 275 },
+                mx: "auto",
                 display: "flex",
                 justifyContent: "center",
               }}
             >
-              <Box sx={{ width: "100%", maxWidth: "fit-content" }}>
-                <TaskItem task={task} onTaskUpdate={refreshTasks} />
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+              <TaskItem task={task} onTaskUpdate={refreshTasks} />
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
 
       <TaskEditModal
         open={addTaskModalOpen}

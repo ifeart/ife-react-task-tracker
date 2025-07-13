@@ -22,13 +22,12 @@ export const darkTheme = createTheme({
     background: { default: "#121212", paper: "#121212" },
   },
 });
-
 export const lightTheme = createTheme({
   ...baseTheme,
   palette: {
     mode: "light",
     primary: { main: "#673ab7" },
     secondary: { main: "#f5f5f5" },
-    background: { default: "#ffffff", paper: "#ffffff" },
+    background: { default: "#e2e2e2", paper: "#f2f2f2" },
   },
 });

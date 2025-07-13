@@ -32,6 +32,7 @@ export const taskDBService = {
     await TasksIndexDB.tasks.add(task);
   },
   updateTask: async (task: Task): Promise<void> => {
+    task.updatedAt = new Date();
     await TasksIndexDB.tasks.put(task);
   },
   deleteTask: async (id: number): Promise<void> => {

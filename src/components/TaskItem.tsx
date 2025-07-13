@@ -72,7 +72,8 @@ export default function TaskItem({ task, onTaskUpdate }: TaskItemProps) {
     <>
       <Card
         sx={{
-          width: "100%",
+          width: "300px",
+          // height: "300px",
           borderRadius: 3.5,
           display: "flex",
           flexDirection: "column",
@@ -91,14 +92,23 @@ export default function TaskItem({ task, onTaskUpdate }: TaskItemProps) {
           <CardContent
             sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
           >
-            <Typography variant="h6" sx={{ mb: 1, minHeight: 32 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                textOverflow: "ellipsis",
+                mb: 1,
+              }}
+            >
               {task.title}
             </Typography>
             <Typography
               variant="body2"
               sx={{
                 mt: 1,
-                mb: 1,
                 flexGrow: 1,
                 overflow: "hidden",
                 display: "-webkit-box",
@@ -114,7 +124,7 @@ export default function TaskItem({ task, onTaskUpdate }: TaskItemProps) {
                 variant="body2"
                 sx={{
                   mt: 1,
-                  mb: 0.7,
+                  mb: 0.5,
                   display: "flex",
                   alignItems: "center",
                   flexWrap: "wrap",

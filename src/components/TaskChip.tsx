@@ -117,7 +117,7 @@ export default function TaskChip({ task }: TaskChipProps) {
   const priorityProps = getPriorityChipProps(task.priority);
 
   return (
-    <Box sx={{ display: "flex", gap: 1, mt: 2, flexWrap: "wrap" }}>
+    <Box sx={{ display: "flex", gap: 1, mt: 1, flexWrap: "wrap" }}>
       <Chip
         label={statusProps.label}
         color={statusProps.color}
