@@ -14,7 +14,7 @@ import TaskChip from "./TaskChip";
 import { bull } from "../utils/TextHelper";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TaskEditModal from "./TaskEditModal";
 import { taskDBService } from "../data/database/db";
 
