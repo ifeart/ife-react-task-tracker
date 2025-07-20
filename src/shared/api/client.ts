@@ -4,8 +4,8 @@ import type { Task, AuthData, AuthResponse } from '@entities/task/model/types';
 import { testTasks } from './testTasks';
 import Cookies from 'js-cookie';
 
-// const API_URL = 'https://build-back-eosin.vercel.app/api';
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://final-ifetasks-backend.vercel.app/api';
+// const API_URL = 'http://localhost:3001/api';
 
 class ApiClient {
   private api: AxiosInstance;
@@ -78,10 +78,8 @@ class ApiClient {
   initializeFromStorage(): void {
     const accessToken = Cookies.get('access_token');
     const refreshToken = Cookies.get('refresh_token');
-    if (accessToken && refreshToken) {
-      this.accessToken = accessToken;
-      this.refreshToken = refreshToken;
-    }
+    this.accessToken = accessToken || '';
+    this.refreshToken = refreshToken || '';
   }
 
   async fetchTasks(): Promise<Task[]> {

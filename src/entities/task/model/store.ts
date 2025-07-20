@@ -251,12 +251,13 @@ export class TaskStore {
   login = async (payload: AuthData) => {
     try {
       const response = await apiClient.login(payload);
-      Cookies.set("access_token", response.access_token, {
+      await Cookies.set("access_token", response.access_token, {
         expires: 1 / 24,
       });
-      Cookies.set("refresh_token", response.refresh_token, {
+      await Cookies.set("refresh_token", response.refresh_token, {
         expires: 7,
       });
+      await apiClient.initializeFromStorage();
       this.isLoggedIn = true;
     } catch (error) {
       runInAction(() => {
@@ -268,13 +269,14 @@ export class TaskStore {
   signUp = async (payload: AuthData) => {
     try {
       const response = await apiClient.register(payload);
-      Cookies.set("access_token", response.access_token, {
+      await Cookies.set("access_token", response.access_token, {
         expires: 1 / 24,
       });
-      Cookies.set("refresh_token", response.refresh_token, {
+      await  Cookies.set("refresh_token", response.refresh_token, {
         expires: 7,
       });
       this.isLoggedIn = true;
+      await apiClient.initializeFromStorage();
     } catch (error) {
       runInAction(() => {
         this.error = error instanceof Error ? error.message : "error sign up";
