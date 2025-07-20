@@ -23,3 +23,5 @@
 
 для старта требуется установить зависимости npm install
 и запустить dev режим npm run dev
+
+<a href="https://ife-react-task-tracker.vercel.app/">Деплой на vercel + подключенный бэк</a>
