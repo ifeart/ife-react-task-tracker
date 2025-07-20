@@ -1,6 +1,5 @@
 # ifeTasks
 
-<<<<<<< Updated upstream
 Таск-треке на основе React + Vite, UI-фреймворк - Material UI (MUI).
 Так же были использованы библиотеки:
 - Dexie.js для работы с IndexDB (хранение задач), 
@@ -9,7 +8,7 @@
 - Приложение проверено в Safari, Google Chrome (все платформы), Telegram 
 - дизайн адаптирован под мобильные платформы
 (встроенный браузер), Firefox
-=======
+
 Таск-трекер на основе React + Vite, UI-фреймворк - Material UI (MUI).
 
 
@@ -31,7 +30,6 @@
 - axios для http запросов
 - mobx как менеджер состояний
 - react router v6
->>>>>>> Stashed changes
 
 для старта требуется установить зависимости npm install
 и запустить dev режим npm run dev
