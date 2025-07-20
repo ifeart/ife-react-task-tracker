@@ -25,3 +25,7 @@
 и запустить dev режим npm run dev
 
 <a href="https://ife-react-task-tracker.vercel.app/">Деплой на vercel + подключенный бэк</a>
+пароль и логин (просто заполненные таски, можно и новый создать):
+```
+12345trew
+```
