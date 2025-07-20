@@ -8,16 +8,21 @@ import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../theme/ThemeContext";
+import { ThemeContext } from "@features/theme-switcher";
 import BrightnessAutoIcon from "@mui/icons-material/BrightnessAuto";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LanguageIcon from "@mui/icons-material/Language";
+import TuneIcon from "@mui/icons-material/Tune";
 import { useTranslation } from "react-i18next";
+import { taskStore } from "@/entities/task/model";
+import { useNavigate } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
+import TaskFilterModal from "./TaskFilterModal";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,15 +67,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function AppHeader() {
+export default function Header() {
+  const isLoggedIn = taskStore.ifLoggedIn();
   const { theme, themeMode, toggleTheme } = React.useContext(ThemeContext);
   const { t, i18n } = useTranslation();
   const searchInputRef = useRef<HTMLInputElement>(null);
-
+  const navigate = useNavigate();
   const [mobileMenuAnchor, setMobileMenuAnchor] =
     React.useState<null | HTMLElement>(null);
   const [languageMenuAnchor, setLanguageMenuAnchor] =
     React.useState<null | HTMLElement>(null);
+  const [filterModalOpen, setFilterModalOpen] = useState(false);
 
   const isMobileMenuOpen = Boolean(mobileMenuAnchor);
   const isLanguageMenuOpen = Boolean(languageMenuAnchor);
@@ -104,6 +111,10 @@ export default function AppHeader() {
     i18n.changeLanguage(lang);
     setLanguageMenuAnchor(null);
     setMobileMenuAnchor(null);
+  };
+
+  const handleSearch = (value: string) => {
+    taskStore.setFilter({ search: value });
   };
 
   const languageMenu = (
@@ -143,6 +154,18 @@ export default function AppHeader() {
         horizontal: "right",
       }}
     >
+      <MenuItem
+        onClick={() => {
+          taskStore.logout();
+          navigate("/login");
+          setMobileMenuAnchor(null);
+        }}
+      >
+        <IconButton size="large" color="inherit">
+          {isLoggedIn ? <LogoutIcon /> : <LoginIcon />}
+        </IconButton>
+        <p>{isLoggedIn ? t("ui.logout") : t("ui.login")}</p>
+      </MenuItem>
       <MenuItem onClick={toggleTheme}>
         <IconButton size="large" color="inherit">
           {getThemeIcon()}
@@ -207,6 +230,7 @@ export default function AppHeader() {
                 sm: "center",
                 md: "flex-start",
               },
+              gap: 1,
             }}
           >
             <Search>
@@ -217,14 +241,7 @@ export default function AppHeader() {
                 placeholder={t("ui.searchTasks")}
                 inputProps={{ "aria-label": "search" }}
                 inputRef={searchInputRef}
-                onChange={(e) => {
-                  if (e.target.value.length > 0) {
-                    console.log(e.target.value);
-                    {
-                      /* не успеваю доделать :(*/
-                    }
-                  }
-                }}
+                onChange={(e) => handleSearch(e.target.value)}
               />
               <Box
                 sx={{
@@ -242,6 +259,20 @@ export default function AppHeader() {
                 {navigator.platform.includes("Mac") ? "⌘K" : "Ctrl+K"}
               </Box>
             </Search>
+
+            <IconButton
+              color="inherit"
+              onClick={() => setFilterModalOpen(true)}
+              sx={{
+                display: { xs: "flex" },
+                backgroundColor: alpha(theme.palette.common.white, 0.15),
+                "&:hover": {
+                  backgroundColor: alpha(theme.palette.common.white, 0.25),
+                },
+              }}
+            >
+              <TuneIcon />
+            </IconButton>
           </Box>
 
           <Box
@@ -264,10 +295,16 @@ export default function AppHeader() {
               >
                 <LanguageIcon />
               </IconButton>
-              {/* Оставлю на будущее, если будет нужно, пока не работает :) */}
-              {/* <IconButton size="large" color="inherit">
-                <AccountCircle />
-              </IconButton> */}
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={() => {
+                  taskStore.logout();
+                  navigate("/login");
+                }}
+              >
+                {isLoggedIn ? <LogoutIcon /> : <LoginIcon />}
+              </IconButton>
             </Box>
 
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -284,6 +321,10 @@ export default function AppHeader() {
       </AppBar>
       {mobileMenu}
       {languageMenu}
+      <TaskFilterModal
+        open={filterModalOpen}
+        onClose={() => setFilterModalOpen(false)}
+      />
     </Box>
   );
 }

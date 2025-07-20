@@ -10,11 +10,18 @@ import {
   MenuItem,
   Stack,
   IconButton,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import type { Task, TaskCategory, TaskStatus, TaskPriority } from "./TaskItem";
+import type {
+  Task,
+  TaskCategory,
+  TaskStatus,
+  TaskPriority,
+} from "@entities/task/model/types";
 
 interface TaskEditModalProps {
   open: boolean;
@@ -69,7 +76,7 @@ export default function TaskEditModal({
 
     // if (task) {
     const updatedTask: Task = {
-      id: task?.id || 0,
+      id: task?.id || "",
       title: formData.title,
       description: formData.description || "",
       category: formData.category || "feature",
@@ -139,8 +146,6 @@ export default function TaskEditModal({
             rows={3}
           />
 
-          {/* не работает (*/}
-
           <TextField
             fullWidth
             label={t("task.dueDate")}
@@ -178,23 +183,6 @@ export default function TaskEditModal({
               <MenuItem value="test">{t("category.test")}</MenuItem>
             </Select>
           </FormControl>
-
-          <FormControl fullWidth>
-            <InputLabel>{t("task.status")}</InputLabel>
-            <Select
-              required
-              value={formData.status || ""}
-              label={t("task.status")}
-              onChange={(e) =>
-                handleInputChange("status", e.target.value as TaskStatus)
-              }
-            >
-              <MenuItem value="todo">{t("status.todo")}</MenuItem>
-              <MenuItem value="in_progress">{t("status.in_progress")}</MenuItem>
-              <MenuItem value="done">{t("status.done")}</MenuItem>
-            </Select>
-          </FormControl>
-
           <FormControl fullWidth>
             <InputLabel>{t("task.priority")}</InputLabel>
             <Select
@@ -209,6 +197,47 @@ export default function TaskEditModal({
               <MenuItem value="medium">{t("priority.medium")}</MenuItem>
               <MenuItem value="high">{t("priority.high")}</MenuItem>
             </Select>
+          </FormControl>
+          <FormControl fullWidth>
+            {/* <InputLabel>{t("task.status")}</InputLabel> */}
+            <ToggleButtonGroup
+              value={formData.status || ""}
+              fullWidth={true}
+              onChange={(_, value) =>
+                handleInputChange("status", value as TaskStatus)
+              }
+              exclusive
+              color="primary"
+              sx={{
+                "& .MuiToggleButtonGroup-root": {
+                  borderRadius: 1,
+                  border: "1px solid",
+                  borderColor: "divider",
+                },
+              }}
+            >
+              <ToggleButton value="todo" sx={{ textTransform: "none" }}>
+                {t("status.todo")}
+              </ToggleButton>
+              <ToggleButton value="in_progress" sx={{ textTransform: "none" }}>
+                {t("status.in_progress")}
+              </ToggleButton>
+              <ToggleButton value="done" sx={{ textTransform: "none" }}>
+                {t("status.done")}
+              </ToggleButton>
+            </ToggleButtonGroup>
+            {/* <Select
+              required
+              value={formData.status || ""}
+              label={t("task.status")}
+              onChange={(e) =>
+                handleInputChange("status", e.target.value as TaskStatus)
+              }
+            >
+              <MenuItem value="todo">{t("status.todo")}</MenuItem>
+              <MenuItem value="in_progress">{t("status.in_progress")}</MenuItem>
+              <MenuItem value="done">{t("status.done")}</MenuItem>
+            </Select> */}
           </FormControl>
 
           <Box sx={{ display: "flex", gap: 2, justifyContent: "flex-end" }}>

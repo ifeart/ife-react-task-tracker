@@ -1,0 +1,94 @@
+{
+    "task": {
+        "title": "Task",
+        "description": "Description",
+        "createdAt": "Created",
+        "updatedAt": "Updated",
+        "dueDate": "Due Date",
+        "category": "Category",
+        "status": "Status",
+        "priority": "Priority"
+    },
+    "status": {
+        "todo": "Pending",
+        "in_progress": "In Progress",
+        "done": "Done"
+    },
+    "category": {
+        "bug": "Bug",
+        "feature": "Feature",
+        "documentation": "Documentation",
+        "refactor": "Refactor",
+        "test": "Test"
+    },
+    "priority": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+    },
+    "ui": {
+        "taskTracker": "Task Tracker",
+        "demoDescription": "By default, test tasks are used for demonstration, which can be deleted and replaced with your own",
+        "unknown": "Unknown",
+        "other": "Other",
+        "editTask": "Edit",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "confirmDelete": "Confirm Deletion",
+        "deleteTaskConfirmation": "Are you sure you want to delete task \"{{taskTitle}}\"?",
+        "toogleTheme": "Toggle Theme",
+        "ru": "Russian",
+        "en": "English",
+        "language": "Language",
+        "refreshTestTasks": "Refresh Test Tasks",
+        "deleteAllTasks": "Delete All Tasks",
+        "searchTasks": "Search task...",
+        "addTask": "Add Task",
+        "taskNotFound": "Task not found :(",
+        "noDescription": "No description",
+        "dueDate": "Deadline",
+        "noDueDate": "No deadline",
+        "deleteTask": "Delete",
+        "doneTask": "Done",
+        "back": "Back",
+        "deleteAllTasksConfirmation": "Are you sure you want to delete all tasks?",
+        "login": "Login",
+        "logout": "Logout",
+        "search": "Search",
+        "status": "Status",
+        "category": "Category",
+        "priority": "Priority",
+        "all": "All",
+        "sortBy": "Sort by",
+        "filters": "Filters",
+        "reset": "Reset",
+        "apply": "Apply",
+        "settings": "Settings"
+    },
+    "sort": {
+        "title": "Title",
+        "createdAt": "Created Date",
+        "updatedAt": "Updated Date",
+        "dueDate": "Due Date",
+        "category": "Category",
+        "status": "Status",
+        "priority": "Priority"
+    },
+    "TaskDetailPage": {
+        "createdAt": "Created",
+        "updatedAt": "Updated"
+    },
+    "login": {
+        "username": "Username",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "login": "Login",
+        "register": "Register",
+        "registerButton": "Register",
+        "usernameMinLength": "Username must be at least 4 characters long and contain only letters and numbers",
+        "passwordMinLength": "Password must be at least 8 characters long",
+        "passwordMinLengthMatch": "Password must contain both letters and numbers",
+        "passwordMatch": "Passwords do not match"
+    }
+}

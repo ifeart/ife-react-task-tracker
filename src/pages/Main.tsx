@@ -1,4 +1,4 @@
-import TaskList from "../components/TaskList";
+import TaskList from "@widgets/TaskList";
 
 export default function MainPage() {
   return (

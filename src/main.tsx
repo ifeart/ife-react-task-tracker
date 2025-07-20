@@ -1,12 +1,11 @@
-import { StrictMode, useContext } from "react";
+import { useContext } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
-import { ThemeProvider } from "./theme/ThemeContext.tsx";
+import "./app/styles/index.css";
+import App from "./app/App.tsx";
+import { ThemeProvider, ThemeContext } from "@features/theme-switcher";
 import { ThemeProvider as MUIThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import { ThemeContext } from "./theme/ThemeContext.tsx";
-import "./data/i18n/i18n.tsx";
+import "@shared/config/i18n/index";
 
 function AppTheme() {
   const { theme } = useContext(ThemeContext);
@@ -20,9 +19,9 @@ function AppTheme() {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  <>
     <ThemeProvider>
       <AppTheme />
     </ThemeProvider>
-  </StrictMode>
+  </>
 );

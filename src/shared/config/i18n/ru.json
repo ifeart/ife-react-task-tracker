@@ -1,0 +1,94 @@
+{
+    "task": {
+        "title": "Задача",
+        "description": "Описание",
+        "createdAt": "Создано",
+        "updatedAt": "Обновлено",
+        "dueDate": "Срок выполнения",
+        "category": "Категория",
+        "status": "Статус",
+        "priority": "Приоритет"
+    },
+    "status": {
+        "todo": "Ожидает",
+        "in_progress": "В работе",
+        "done": "Выполнено"
+    },
+    "category": {
+        "bug": "Баг",
+        "feature": "Функция",
+        "documentation": "Документация",
+        "refactor": "Рефакторинг",
+        "test": "Тест"
+    },
+    "priority": {
+        "low": "Низкий",
+        "medium": "Средний",
+        "high": "Высокий"
+    },
+    "ui": {
+        "taskTracker": "Трекер задач",
+        "demoDescription": "По умолчанию для демонстрации используются тестовые задачи, которые можно удалить и заменить на свои",
+        "unknown": "Неизвестно",
+        "other": "Прочее",
+        "editTask": "Редактировать",
+        "cancel": "Отмена",
+        "save": "Сохранить",
+        "delete": "Удалить",
+        "confirmDelete": "Подтвердите удаление",
+        "deleteTaskConfirmation": "Вы уверены, что хотите удалить задачу \"{{taskTitle}}\"?",
+        "toogleTheme": "Переключить тему",
+        "ru": "Русский",
+        "en": "Английский",
+        "language": "Язык",
+        "refreshTestTasks": "Заполнить тестовыми задачами",
+        "deleteAllTasks": "Удалить все задачи",
+        "searchTasks": "Поиск задачи...",
+        "addTask": "Добавить задачу",
+        "taskNotFound": "Задача не найдена :(",
+        "noDescription": "Нет описания",
+        "dueDate": "Дедлайн",
+        "noDueDate": "Без дедлайна",
+        "deleteTask": "Удалить",
+        "doneTask": "Завершить",
+        "back": "Назад",
+        "deleteAllTasksConfirmation": "Вы уверены, что хотите удалить все задачи?",
+        "login": "Войти в аккаунт",
+        "logout": "Выйти из аккаунта",
+        "search": "Поиск",
+        "status": "Статус",
+        "category": "Категория",
+        "priority": "Приоритет",
+        "all": "Все",
+        "sortBy": "Сортировать по",
+        "filters": "Фильтры",
+        "reset": "Сбросить",
+        "apply": "Применить",
+        "settings": "Настройки"
+    },
+    "sort": {
+        "title": "Названию",
+        "createdAt": "Дате создания",
+        "updatedAt": "Дате обновления",
+        "dueDate": "Сроку",
+        "category": "Категории",
+        "status": "Статусу",
+        "priority": "Приоритету"
+    },
+    "TaskDetailPage": {
+        "createdAt": "Создано",
+        "updatedAt": "Обновлено"
+    },
+    "login": {
+        "username": "Имя пользователя",
+        "password": "Пароль",
+        "confirmPassword": "Подтвердите пароль",
+        "login": "Войти",
+        "register": "Регистрация",
+        "registerButton": "Зарегистрироваться",
+        "usernameMinLength": "Имя пользователя должно быть не менее 4 символов и содержать только буквы и цифры",
+        "passwordMinLength": "Пароль должен быть не менее 8 символов",
+        "passwordMinLengthMatch": "Пароль должен содержать буквы и цифры",
+        "passwordMatch": "Пароли не совпадают"
+    }
+}

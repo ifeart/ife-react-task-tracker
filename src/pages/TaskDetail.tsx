@@ -1,56 +1,100 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import type { Task } from "../components/TaskItem";
-import { taskDBService } from "../data/database/db";
+import type { Task } from "@entities/task/model/types";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import TaskChip from "../components/TaskChip";
-import i18n from "../data/i18n/i18n";
-import { bull } from "../utils/TextHelper";
+import TaskChip from "@widgets/TaskChip";
+import i18n from "@shared/config/i18n/index";
+import { bull } from "@shared/ui/TextHelper";
 import EventNoteIcon from "@mui/icons-material/EventNote";
-import TaskEditModal from "../components/TaskEditModal";
+import TaskEditModal from "@widgets/TaskEditModal";
+import DeleteTaskDialog from "@widgets/DeleteTaskDialog";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import LoaderCircle from "@shared/ui/loaderCircle";
+import { observer } from "mobx-react-lite";
+import { taskStore } from "@entities/task/model";
 
-export default function TaskDetailPage() {
+const TaskDetailPage = observer(() => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const [task, setTask] = useState<Task | undefined>(undefined);
   const [editModalOpen, setEditModalOpen] = useState(false);
-
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [task, setTask] = useState<Task | null>(null);
   const navigate = useNavigate();
 
   const fetchTask = async () => {
-    const task = await taskDBService.getTask(Number(id));
-    setTask(task);
+    const fetchedTask = await taskStore.fetchTaskById(String(id));
+    setTask(fetchedTask || null);
   };
 
   useEffect(() => {
     fetchTask();
   }, [id]);
 
-  const handleTaskDone = async (taskId: number) => {
-    await taskDBService.doneTask(taskId);
-    await fetchTask();
+  const handleTaskDone = async (taskId: string) => {
+    try {
+      await taskStore.markTaskAsDone(taskId);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleTaskDelete = async (taskId: number) => {
-    await taskDBService.deleteTask(taskId);
-    navigate("/");
+  const handleTaskDelete = async () => {
+    if (!task) return;
+
+    try {
+      await taskStore.deleteTask(task.id);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setDeleteDialogOpen(false);
+    }
   };
 
   const handleTaskUpdate = async (updatedTask: Task) => {
-    await taskDBService.updateTask(updatedTask);
-    await fetchTask();
-    setEditModalOpen(false);
-    navigate("/");
+    try {
+      await taskStore.updateTask(updatedTask);
+      await fetchTask();
+      setEditModalOpen(false);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <>
-      {task ? (
+      {taskStore.loading ? (
+        <LoaderCircle />
+      ) : task ? (
         <Container
           maxWidth="md"
-          sx={{ py: 3, display: "flex", flexDirection: "column", gap: 2 }}
+          sx={{
+            py: 3,
+            display: "flex",
+            backgroundColor: "background.paper",
+            flexDirection: "column",
+            gap: 2,
+            borderRadius: 3.5,
+          }}
         >
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => navigate("/")}
+            sx={{
+              mb: 2,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              width: "fit-content",
+            }}
+          >
+            <ArrowBackIcon />
+            {t("ui.back")}
+          </Button>
           <Typography variant="h4" component="h1">
             {task.title}
           </Typography>
@@ -76,12 +120,12 @@ export default function TaskDetailPage() {
                   <EventNoteIcon
                     sx={{ fontSize: "1.4rem", mr: 1, color: "text.secondary" }}
                   />
-                  {task.dueDate.toLocaleTimeString(i18n.language, {
+                  {new Date(task.dueDate).toLocaleTimeString(i18n.language, {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
                   {bull}
-                  {task.dueDate.toLocaleDateString(i18n.language, {
+                  {new Date(task.dueDate).toLocaleDateString(i18n.language, {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -104,7 +148,7 @@ export default function TaskDetailPage() {
           </Typography>
           <Typography variant="body1" color="text.primary">
             {t("TaskDetailPage.createdAt")}{" "}
-            {task.createdAt.toLocaleString(i18n.language, {
+            {new Date(task.createdAt).toLocaleString(i18n.language, {
               year: "numeric",
               month: "long",
               day: "numeric",
@@ -114,7 +158,7 @@ export default function TaskDetailPage() {
           </Typography>
           <Typography variant="body1" color="text.primary">
             {t("TaskDetailPage.updatedAt")}{" "}
-            {task.updatedAt.toLocaleString(i18n.language, {
+            {new Date(task.updatedAt).toLocaleString(i18n.language, {
               year: "numeric",
               month: "long",
               day: "numeric",
@@ -141,14 +185,29 @@ export default function TaskDetailPage() {
             <Button
               variant="outlined"
               color="error"
-              onClick={() => handleTaskDelete(task.id)}
+              onClick={() => setDeleteDialogOpen(true)}
             >
               {t("ui.deleteTask")}
             </Button>
           </Box>
         </Container>
       ) : (
-        <Container maxWidth="xl" sx={{ py: 3 }}>
+        <Container maxWidth="md" sx={{ py: 3 }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => navigate("/")}
+            sx={{
+              mb: 2,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              width: "fit-content",
+            }}
+          >
+            <ArrowBackIcon />
+            {t("ui.back")}
+          </Button>
           <Typography variant="h4" component="h1" gutterBottom>
             {t("ui.taskNotFound")}
           </Typography>
@@ -158,9 +217,18 @@ export default function TaskDetailPage() {
       <TaskEditModal
         open={editModalOpen}
         onClose={() => setEditModalOpen(false)}
-        task={task || null}
+        task={task}
         onSave={handleTaskUpdate}
+      />
+
+      <DeleteTaskDialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+        onConfirm={handleTaskDelete}
+        taskTitle={task?.title}
       />
     </>
   );
-}
+});
+
+export default TaskDetailPage;
